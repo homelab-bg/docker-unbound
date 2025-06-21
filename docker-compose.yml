@@ -12,7 +12,8 @@ services:
       - PUID=${PUID}
       - PGID=${PGID}
     volumes:
-      - ${PWD}/unbound.conf:/unbound.conf:ro
+      #- ${PWD}/unbound.conf:/unbound.conf:ro
+      - ./unbound.conf:/unbound.conf:ro
       #- ${PWD}/unbound.conf:/etc/unbound/unbound.conf:ro
       #- ./unbound.conf:/etc/unbound/unbound.conf:ro
       #- ./access_lists.conf:/etc/unbound/access_lists.conf:ro
