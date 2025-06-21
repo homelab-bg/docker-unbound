@@ -1,0 +1,26 @@
+---
+
+services:
+  unbound:
+    # https://gitlab.alpinelinux.org/alpine/infra/docker/unbound
+    image: alpinelinux/unbound:${UNBOUND_VERSION:-latest}
+    container_name: unbound
+    hostname: unbound
+    restart: unless-stopped
+    environment:
+      - TZ=${TIMEZONE}
+      - PUID=${PUID}
+      - PGID=${PGID}
+    volumes:
+      - ./unbound.conf:/etc/unbound/unbound.conf:ro
+      - ./access_lists.conf:/etc/unbound/access_lists.conf:ro
+      - ./host_entries.conf:/etc/unbound/host_entries.conf:ro
+    healthcheck:
+      test: ["CMD", "unbound-control", "status"]
+      interval: ${HEALTH_CHECK_INTERVAL}
+      timeout: ${HEALTH_CHECK_TIMEOUT}
+      retries: ${HEALTH_CHECK_RETRIES}
+      start_period: 10s
+      start_interval: 3s
+    ports:
+      - "5353:53"
