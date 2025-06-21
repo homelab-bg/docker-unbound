@@ -11,8 +11,8 @@ services:
       - TZ=${TIMEZONE}
       - PUID=${PUID}
       - PGID=${PGID}
-    volumes:
-      - ./unbound.conf:/etc/unbound/unbound.conf:ro
+    #volumes:
+      #- ./unbound.conf:/etc/unbound/unbound.conf:ro
       #- ./access_lists.conf:/etc/unbound/access_lists.conf:ro
       #- ./host_entries.conf:/etc/unbound/host_entries.conf:ro
     healthcheck:
